@@ -8,13 +8,20 @@
 <!--The following script tag downloads a font from the Adobe Edge Web Fonts server for use within the web page. We recommend that you do not modify it.--><script>var __adobewebfontsappname__="dreamweaver"</script><script src="http://use.edgefonts.net/raleway:n1:default;montez:n4:default.js" type="text/javascript"></script>
 <body>
 
+<!-- tooltip when mousing over affinity buttons -->
 <div id='popup' class='popup'></div>
 
+<!-- sidebar contains all statistics.  all easily viewable, and used as counters -->
 <section id='sidebar'>
+<!-- the affinity section, contains the 5 affinities and their counters -->
   <div id='affinityDisplayWrapper'>
+  <!-- ascendant wrapper div -->
     <div>
+    <!-- ascendant icon image -->
       <img src='img/Ascendant_Icon.png' alt='ascendant img'/>
+      <!-- name of affinity -->
       <span>Ascendant</span>
+      <!-- element that contains the ascendant display/counter -->
       <span id='ascendant'>0</span>
     </div>
   
@@ -43,10 +50,15 @@
     </div>
   </div>
   
+  <!-- character stats display.  tabulates all bonus stats -->
   <div id='statsChart'>
+  <!-- the first esction of the character stats display -->
+  <!-- chose to use details/summary to keep unnecessary stats hidden -->
+  <!-- should hopefully keep the page shorter, and cleaner -->
 		<details id='attributes'>
     	<summary><h4>Attributes</h4></summary>
       
+      <!-- column containing the stat names -->
       <div class='col1'>
        <ul>
           <li>Physique</li>
@@ -58,6 +70,7 @@
          <div class='clear'></div>
       </div>
       
+      <!-- column containing stat values -->
       <div class='col2'>
         <ul class='col2Values'>
           <li id='physique'>0</li>
@@ -373,9 +386,15 @@
 	</div>
 </section>
 
+<!-- constellation wrapper -->
 <div id='constellations'>
+<!-- first constellation.  is unique.  only constellation that can be accessed
+     without previous affinity. stat bonuses are displayed in a tooltip on mouseover -->
   <div id='crossroads'>
     <h1>Crossroads</h1>	
+    <!-- first crossroads button.  calls different functions depending on which 
+         mouse button is clicked.  default context menu prevented from display. -->+
+                                                          
     <div id='ascendantBtn' onclick='btnProcess("ascendantBtn", event.button);' oncontextmenu='btnProcess("ascendantBtn", event.button);return false' onmouseenter='display(event, "ascendant");' onMouseOut='hide();'></div>
     <div id='chaosBtn' onclick='btnProcess("chaosBtn", event.button);' oncontextmenu='btnProcess("chaosBtn", event.button);return false' onmouseenter='display(event, "chaos");' onMouseOut='hide();'></div>
     <div id='orderBtn' onclick='btnProcess("orderBtn", event.button);' oncontextmenu='btnProcess("orderBtn", event.button);return false' onmouseenter='display(event, "order");' onMouseOut='hide();'></div>
@@ -383,14 +402,19 @@
     <div id='eldritchBtn' onclick='btnProcess("eldritchBtn", event.button);' oncontextmenu='btnProcess("eldritchBtn", event.button);return false' onmouseenter='display(event, "eldritch");' onMouseOut='hide();'></div>
                                            
   </div>
-  
+
+<!-- constellation wrapper -->  
   <div id='affinitiesWrapper'>
+  <!-- ascendant affinity wrapper -->
     <div id='affinityAscendant'>
       <h1>Ascendant</h1>
       
+      <!-- first ascendant constellation -->
       <div id='anvil'>
+      	<!-- the name of the constellation and how many of it's stars have been selected -->
 				<h3 id='anvilTitle' class='locked'>Anvil <span id='anvilCount'>0</span></h3>
         <ul>
+        	<!-- the stars, which, when clicked, call the star.countCheck method, where they are processed -->
         	<li id='anvil1' class='locked' onclick='anvil1.countCheck("anvil1", "defense", 10, event.button);' oncontextmenu='anvil1.countCheck("anvil1", "defense", -10, event.button); return false'>+10 Defensive Ability</li>
           <li id='anvil2' class='locked' onclick='anvil2.countCheck("anvil2", "physique", 10, event.button);' oncontextmenu='anvil2.countCheck("anvil2", "physique", -10, event.button); return false'>+10 Physique</li>
           <li id='anvil3' class='locked' onclick='anvil3.countCheck("anvil3", "armorAbsorb", 10, event.button);' oncontextmenu='anvil3.countCheck("anvil3", "armorAbsorb", -10, event.button); return false'>Increases Armor Absorption by 5%</li>

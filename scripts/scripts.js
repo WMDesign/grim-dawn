@@ -5,7 +5,7 @@ var ordValCrossroads = 0;
 var priValCrossroads = 0;
 var eldValCrossroads = 0;
 
-//anvil variables
+//anvil variables - this should probably eventually be an array or loop of some sort
 var anvil1Count = 0;
 var anvil2Count = 0;
 var anvil3Count = 0;
@@ -13,25 +13,35 @@ var anvil4Count = 0;
 var anvil5Count = 0;
 
 function btnProcess(btn, btnCode) {
-	
+  //processes the initial affinity button - should probably be remade as an object	
 	var ascVal = Number(document.getElementById('ascendant').innerHTML);
 	var chaVal = Number(document.getElementById('chaos').innerHTML);
 	var ordVal = Number(document.getElementById('order').innerHTML);
 	var priVal = Number(document.getElementById('primordial').innerHTML);
 	var eldVal = Number(document.getElementById('eldritch').innerHTML);
 
+  //if statement determins if values should be added (left-click) or subtracted
+	//(right click).  Switch statement then performs appropriate processing based
+	//on which button was interacted with
 	if (btnCode === 0)
 	{
 		switch(btn) {
 			case 'ascendantBtn':
 				if (ascValCrossroads <= 0)
 				{
+					//take the value of ascendant affinity (ascVal), add 1
 					ascVal += 1;
+					//add one to the crossroads counter, so the button can't be selected
+					//multiple times
 					ascValCrossroads += 1;
+					//set the ascendant affinity display to the new ascVal value
 					document.getElementById('ascendant').innerHTML = ascVal;
+					//add a class to the ascendant button to indicate it's been selected
 					document.getElementById('ascendantBtn').className += ' active';
-					btnActive('ascendant');
+					//adds the stat values to their current totals in the sidebar
 					statValues('offense', 15);
+					//unlocks the anvil constellation - will need to be turned into an array
+					//and looped through once other constellations are added.
 					anvil.unlock();
 				}
 			break;
@@ -43,7 +53,6 @@ function btnProcess(btn, btnCode) {
 					chaValCrossroads += 1;
 					document.getElementById('chaos').innerHTML = chaVal;
 					document.getElementById('chaosBtn').className += ' active';
-					btnActive('chaos');
 					statValues('health', 5);
 					anvil.unlock();					
 				}
@@ -56,7 +65,6 @@ function btnProcess(btn, btnCode) {
 					ordValCrossroads += 1;
 					document.getElementById('order').innerHTML = ordVal;
 					document.getElementById('orderBtn').className += ' active';
-					btnActive('order');
 					statValues('health', 5);
 					anvil.unlock();					
 				}
@@ -69,7 +77,6 @@ function btnProcess(btn, btnCode) {
 					priValCrossroads += 1;
 					document.getElementById('primordial').innerHTML = priVal;
 					document.getElementById('primordialBtn').className += ' active';
-					btnActive('primordial');
 					statValues('defense', 15);
 					anvil.unlock();					
 				}
@@ -82,7 +89,6 @@ function btnProcess(btn, btnCode) {
 					eldValCrossroads += 1;
 					document.getElementById('eldritch').innerHTML = eldVal;
 					document.getElementById('eldritchBtn').className += ' active';
-					btnActive('eldritch');
 					statValues('offense', 15);
 					anvil.unlock();					
 				}
@@ -163,26 +169,12 @@ function btnProcess(btn, btnCode) {
 	}
 }
 
-function btnActive(devotion) {
-	
-	if (ascValCrossroads === 0)
-	{
-		//default
-	}
-	else if(ascValCrossroads === 1)
-	{
-		//active
-	}
-	else 
-	{
-		alert('btnActive error');
-	}
-}
-
 function display(event, devotion) {
-	
-	
+  //function that displays a tooltip when the five affinity buttons are hovered over.
+	//Might eventually be used to display all tooltips like the in-game interface.	
 	var tooltip = document.getElementById('popup');
+	//Sets the location of the tooltip to be slightly below and to the right of the 
+	//mouse pointer
 	var x = event.clientX;
 	var y = event.clientY;
 	
@@ -192,6 +184,8 @@ function display(event, devotion) {
 
 	tooltip.style.display = 'block';
 
+  //switch to determin which tooltip to display, based on the affinity of the button
+	//that was hovered over.
 	switch (devotion) {
 		case 'ascendant':
 			tooltip.innerHTML = '+15 Offensive Ability <br /> 1 <img src="img/Ascendant_Icon.png" />';
@@ -216,15 +210,15 @@ function display(event, devotion) {
 }
 
 function hide() {
-	
-	
+	//hide the tooltip shown by display(); once the mouse is moved off the button
 	var div = document.getElementById('popup');
-	
 	div.style.display = 'none';
 }
 
 function statValues(stat, value) {
-	
+	//this function is part of processing an affinity button or star.  takes the 
+	//stat(s) and their values and adds it to the value currently stored in the 
+	//sidebar
 	var val;  //stores the innerHTML string
 
 //Attribute Variables
@@ -947,9 +941,13 @@ var vitDecayRetal = document.getElementById('vitDecayRetal');
 }
 
 function constellation (name, starCount, needA, needC, needE, needO, needP, giveA, giveC, giveE, giveO, giveP) {
+	//constellation object constructor. constellations are groupings of stars
+	//(also objects)
+	
+	//not sure if this is needed anymore or not.  don't have time to test right now.
 	this.locked = true;
 		
-	//Definitions
+	//Definitions - is this section necessary?  is the this. part implied?
 	this.name = name;
 	this.starCount = starCount;
 	this.needA = needA;
@@ -965,18 +963,29 @@ function constellation (name, starCount, needA, needC, needE, needO, needP, give
 
 	//Methods
 	this.unlock = function(count) {
+		
+		//this method determins if there is enough affinity in the sidebar to unlock 
+		//this constellation (make stars selectable)
+		
+		//get the affinity values from the sidebar
 		var asc = Number(document.getElementById('ascendant').innerHTML);
 		var cha = Number(document.getElementById('chaos').innerHTML);
 		var eld = Number(document.getElementById('eldritch').innerHTML);
 		var ord = Number(document.getElementById('order').innerHTML);
 		var pri = Number(document.getElementById('primordial').innerHTML);
 
+		//if statement checks if the affinity needs are all met
 		if (this.needA <= asc && this.needC <= cha && this.needE <= eld && this.needO <= ord && this.needP <= pri) {
+			//if the needs are met, set the locked toggle to false, and apply the class 
+			//'unlocked' to the constellation itseslf and it's first star
 			this.locked = false;
 			document.getElementById(this.name + 'Title').className = 'unlocked';
 			document.getElementById(this.name + '1').className = 'unlocked';
 		}
 		else {
+			//if needs are NOT met, set the locked toggle to true and apply the class
+			//'locked' to the first star and the constellation4
+			
 			this.locked = true;
 			document.getElementById(this.name + 'Title').className = 'locked';
 			document.getElementById(this.name + '1').className = 'locked';		
@@ -984,6 +993,9 @@ function constellation (name, starCount, needA, needC, needE, needO, needP, give
 	};
 	
 	this.award = function(op) {
+		//this function is called once the constellation is complete, or once a
+		//completed constellation has stars deselected.  based on the value
+		//of op, it either adds or subtracts the bonus affinity.
 			var asc = document.getElementById('ascendant');
 			var cha = document.getElementById('chaos');
 			var eld = document.getElementById('eldritch');
@@ -1019,35 +1031,33 @@ function constellation (name, starCount, needA, needC, needE, needO, needP, give
 	};
 }
 
-function constProcess(constName, event) {
-	var count = Number(document.getElementById(constName).innerHTML);
-	constName.unlock(count);	
-}
-
 function star(constName, name, stats, values, place, last) {
+	//star object constructor
 	this.name = name;
 	this.stats = stats;
 	this.values = values;
 	this.place = place;
 	this.last = last;
+	//global variable declaration
 	constName = constName;
 	
 	this.starProcess = function(name, stats, values, event) 
 		{
+			//star processing method
 			var btnCode = event;
 			var str = name;
 			str = str.slice(0, -1);	
 			var cnt = str + 'Count';
 			var ugh = Number(document.getElementById(cnt).innerHTML);
 			var title = str + 'Title';
-			//add or subtract to <constellation>Count
-			//unlock further stars based on <constellation>Count
+			
+			//if the left mb is clicked
 			if (btnCode === 0) {
 				document.getElementById(this.name).className = 'selected';
 				ugh += 1;
 				document.getElementById(cnt).innerHTML = ugh;
 				document.getElementById(title).className = 'selected';
-			}
+			}//if the right mb is clicked
 			else if ( btnCode === 2){
 				document.getElementById(this.name).className = 'unlocked';
 				ugh -= 1;
@@ -1059,6 +1069,9 @@ function star(constName, name, stats, values, place, last) {
 			}
 		};
 		
+		//if all stars are selected, call the award method of the constellation and
+		//award the correct amount of infinity.  if all stars were selected, but no 
+		//longer are, subtract affinity
 		this.countCheck = function(name, stats, values, event)
 		{
 			var btnCode = event;
@@ -1094,6 +1107,8 @@ function star(constName, name, stats, values, place, last) {
 		};
 }
 
+//object declarations - is this done correctly?  seems like there'd be a more
+//streamlined way to do this
 var anvil = new constellation('anvil', 5, 1, 0, 0, 0, 0, 5, 0, 0, 0, 0);
 var anvil1 = new star('anvil', 'anvil1', ['defense'], [10], 1, 0); 
 var anvil2 = new star('anvil', 'anvil2', ['physique'], [10], 2, 0);
