@@ -1,0 +1,421 @@
+<!doctype html>
+<html>
+<meta charset='utf-8'>
+<title>Grim Dawn - Devotion Calculator</title>
+<link href="styles/styles.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="scripts/scripts.js"></script>
+
+<!--The following script tag downloads a font from the Adobe Edge Web Fonts server for use within the web page. We recommend that you do not modify it.--><script>var __adobewebfontsappname__="dreamweaver"</script><script src="http://use.edgefonts.net/raleway:n1:default;montez:n4:default.js" type="text/javascript"></script>
+<body>
+
+<div id='popup' class='popup'></div>
+
+<section id='sidebar'>
+  <div id='affinityDisplayWrapper'>
+    <div>
+      <img src='img/Ascendant_Icon.png' alt='ascendant img'/>
+      <span>Ascendant</span>
+      <span id='ascendant'>0</span>
+    </div>
+  
+    <div>
+      <img src='img/Chaos_Icon.png' alt='ascendant img'/>
+      <span>Chaos</span>
+      <span id='chaos'>0</span>
+    </div>
+  
+    <div>
+      <img src='img/Order_Icon.png' alt='ascendant img'/>
+      <span>Order</span>
+      <span id='order'>0</span>
+    </div>
+  
+    <div>
+      <img src='img/Primordial_Icon.png' alt='ascendant img'/>
+      <span>Primordial</span>
+      <span id='primordial'>0</span>
+    </div>
+  
+    <div>
+      <img src='img/Eldritch_Icon.png' alt='ascendant img'/>
+      <span>Eldritch</span>
+      <span id='eldritch'>0</span>
+    </div>
+  </div>
+  
+  <div id='statsChart'>
+		<details id='attributes'>
+    	<summary><h4>Attributes</h4></summary>
+      
+      <div class='col1'>
+       <ul>
+          <li>Physique</li>
+          <li>Cunning</li>
+          <li>Spirit</li>
+          <li>Health</li>
+          <li>Energy</li>
+         </ul>
+         <div class='clear'></div>
+      </div>
+      
+      <div class='col2'>
+        <ul class='col2Values'>
+          <li id='physique'>0</li>
+          <li id='cunning'>0</li>
+          <li id='spirit'>0</li>
+          <li id='health'>0</li>
+          <li id='energy'>0</li>
+        </ul>
+        <div class='clear'></div>
+      </div>
+    </details>
+    
+    <details id='combatStats'>
+    	<summary><h4>Combat Stats</h4></summary>
+      
+      <div class='col1'>
+      	<ul>
+        	<li>Offensive Ability</li>
+          <li>Defensive Ability</li>
+          <li>Armor Rating</li>
+        </ul>
+      </div>
+      
+      <div class='col2'>
+      	<ul>
+        	<li id='offense'>0</li>
+          <li id='defense'>0</li>
+          <li id='armor'>0</li>
+        </ul>
+      </div>
+    </details>
+    
+    <details id='resist'>
+    	<summary><h4>Resistances</h4></summary>
+      
+      <div class='col1'>
+      	<ul>
+	        <li>Fire</li>
+          <li>Cold</li>
+          <li>Lightning</li>
+          <li>Poison and Acid</li>
+          <li>Piercing</li>
+          <li>Bleeding</li>
+          <li>Vitality</li>
+          <li>Aether</li>
+          <li>Stun</li>
+          <li>Chaos</li>
+        </ul>
+      </div>
+      
+      <div class='col2'>
+      	<ul>
+        	<li id='fireRes'>0</li>
+          <li id='coldRes'>0</li>
+          <li id='lightningRes'>0</li>
+          <li id='poisonRes'>0</li>
+          <li id='piercingRes'>0</li>
+          <li id='bleedingRes'>0</li>
+          <li id='vitalityRes'>0</li>
+          <li id='aetherRes'>0</li>
+          <li id='stunRes'>0</li>
+          <li id='chaosRes'>0</li>
+        </ul>
+      </div>
+    </details>
+    
+    <details id='character'>
+    	<summary><h4>Character</h4></summary>
+      
+      <div class='col1'>
+      	<ul>
+        	<li>Attack Speed</li>
+          <li>Critical Damage</li>
+          <li>Health Regen</li>
+          <li>Energy Regen</li>
+          <li>Energy Absorb</li>
+          <li>Constitution Bonus</li>
+        </ul>
+      </div>
+      
+      <div id='col2'>
+      	<ul>
+        	<li id='attackSpeed'>0</li>
+          <li id='critDamage'>0</li>
+          <li id='healthRegen'>0</li>
+          <li id='energyRegen'>0</li>
+          <li id='energyAbsorb'>0</li>
+          <li id='constitution'>0</li>
+        </ul>
+      </div>
+    </details>
+    
+    <details id='physical'>
+    	<summary><h4>Physical</h4></summary>
+      
+      <div class='col1'>
+				<ul>
+          <li>Physical Modifier</li>
+          <li>Pierce Modifier</li>
+          <li>Bleed Modifier</li>
+          <li>Bleed Duration</li>
+          <li>Trauma Modifier</li>
+          <li>Trauma Duration</li>
+          <li>Life Steal</li>
+        </ul>
+      </div>
+      
+      <div class='col2'>
+				<ul>
+        	<li id='physMod'>0</li>
+          <li id='pierceMod'>0</li>
+          <li id='bleedMod'>0</li>
+          <li id='bleedDur'>0</li>
+          <li id='traumaMod'>0</li>
+          <li id='traumaDur'>0</li>
+          <li id='lifeSteal'>0</li>
+        </ul>
+      </div>
+    </details>
+    
+    <details id='magical'>
+    	<summary><h4>Magical</h4></summary>
+      
+      <div class='col1'>
+				<ul>
+        	<li>Cast Speed</li>
+	        <li>Cooldown Reduction</li>
+	        <li>Skill Energy Cost</li>
+	        <li>Health Damage</li>
+	        <li>Fire Modifier</li>
+	        <li>Cold Modifier</li>
+	        <li>Lightning Modifier</li>
+	        <li>Acid Modifier</li>
+	        <li>Vitality Modifier</li>
+	        <li>Aether Modifier</li>
+	        <li>Chaos Modifier</li>
+	        <li>Burn Modifier</li>
+	        <li>Burn Duration</li>
+	        <li>Frostburn Modifier</li>
+	        <li>Frostburn Duration</li>
+	        <li>Electrocute Modifier</li>
+	        <li>Electrocute Duration</li>
+	        <li>Poison Modifer</li>
+	        <li>Poison Duration</li>
+	        <li>Vitality Decay Modifier</li>
+	        <li>Vitality Decay Duration</li>
+        </ul>
+      </div>
+      
+      <div class='col2'>
+				<ul>
+    			<li id='castSpeed'>0</li>
+          <li id='coolReduct'>0</li>
+          <li id='energyCost'>0</li>
+          <li id='healthDmg'>0</li>
+          <li id='fireMod'>0</li>
+          <li id='coldMod'>0</li>
+          <li id='lightningMod'>0</li>
+          <li id='acidMod'>0</li>
+          <li id='vitalityMod'>0</li>
+          <li id='aetherMod'>0</li>
+          <li id='chaosMod'>0</li>
+          <li id='burnMod'>0</li>
+          <li id='burnDur'>0</li>
+          <li id='frostMod'>0</li>
+          <li id='frostDur'>0</li>
+          <li id='electMod'>0</li>
+          <li id='electDur'>0</li>
+          <li id='poisonMod'>0</li>
+          <li id='poisonDur'>0</li>
+          <li id='vitDecayMod'>0</li>
+          <li id='vitDecayDur'>0</li>
+        </ul>
+      </div>
+    </details>
+    
+    <details id='pet'>
+    	<summary><h4>Pet Bonuses</h4></summary>
+      
+      <div class='col1'>
+				<ul>
+    			<li>Life</li>
+	        <li>Damage</li>
+	        <li>Attack Speed</li>
+	        <li>Cast Speed</li>
+	        <li>Run Speed</li>
+	        <li>Offensive Ability</li>
+	        <li>Defensive Ability</li>
+	        <li>Fire Resist</li>
+	        <li>Cold Resist</li>
+	        <li>Lightning Resist</li>
+	        <li>Poison and Acid Resist</li>
+	        <li>Pierce Resist</li>
+	        <li>Bleeding Resist</li>
+	        <li>Vitality Resist</li>
+	        <li>Aether Resist</li>
+	        <li>Chaos Resist</li>
+        </ul>
+      </div>
+      
+      <div class='col2'>
+				<ul>
+        	<li id='petLife'>0</li>
+          <li id='petDmg'>0</li>
+          <li id='petAttackSpeed'>0</li>
+          <li id='petRunSpeed'>0</li>
+          <li id='petOffense'>0</li>
+          <li id='petDefense'>0</li>
+          <li id='petFireRes'>0</li>
+          <li id='petColdRes'>0</li>
+          <li id='petLightRes'>0</li>
+          <li id='petPoisonRes'>0</li>
+          <li id='petPierceRes'>0</li>
+          <li id='petBleedRes'>0</li>
+          <li id='petVitalityRes'>0</li>
+          <li id='petAetherRes'>0</li>
+          <li id='petChaosRes'>0</li>
+        </ul>
+      </div>
+    </details>
+    
+    <details id='charDefense'>
+    	<summary><h4>Defense</h4></summary>
+      
+      <div class='col1'>
+				<ul>
+        	<li>Chance to Block</li>
+	        <li>Damage Blocked</li>
+	        <li>Block Recovery</li>
+	        <li>Dodge Chance</li>
+	        <li>Deflect Chance</li>
+	        <li>Physical Resist</li>
+	        <li>Disruption Resist</li>
+	        <li>Life Leech Resist</li>
+	        <li>Energy Leech Resist</li>
+	        <li>Trap Resist</li>
+	        <li>Petrify Resist</li>
+	        <li>Freeze Resist</li>
+	        <li>Sleep Resist</li>
+	        <li>Slow Resist</li>
+        </ul>
+      </div>
+      
+      <div class='col2'>
+				<ul>
+        	<li id='ctb'>0</li>
+          <li id='dmgBlk'>0</li>
+          <li id='blkRecovery'>0</li>
+          <li id='dodge'>0</li>
+          <li id='deflect'>0</li>
+          <li id='physResist'>0</li>
+          <li id='disruptResist'>0</li>
+          <li id='lifeLeechRes'>0</li>
+          <li id='energyLeechRes'>0</li>
+          <li id='trapRes'>0</li>
+          <li id='petrifyRes'>0</li>
+          <li id='freezeRes'>0</li>
+          <li id='sleepRes'>0</li>
+          <li id='slowRes'>0</li>
+        </ul>
+      </div>
+    </details>
+    
+    <details id='retaliation'>
+    	<summary><h4>Retaliation</h4></summary>
+      
+      <div class='col1'>
+				<ul>
+					<li>Damage Reflect</li>
+	        <li>Life Retaliation</li>
+	        <li>Physical Modifier</li>
+	        <li>Pierce Modifier</li>
+	        <li>Bleed Modifier</li>
+          <li>Trauma Modifier</li>
+	        <li>Fire Modifier</li>
+	        <li>Cold Modifier</li>
+	        <li>Lightning Modifier</li>
+	        <li>Acid Modifier</li>
+	        <li>Vitality Modifier</li>
+	        <li>Aether Modifier</li>
+	        <li>Chaos Modifier</li>
+	        <li>Burn Modifier</li>
+	        <li>Frostburn Modifier</li>
+	        <li>Electorcute Modifier</li>
+	        <li>Poison Modifier</li>
+	        <li>Vitality Decay Modifier</li>
+        </ul>
+      </div>
+      
+      <div class='col2'>
+				<ul>
+        	<li id='dmgReflect'>0</li>
+          <li id='lifeRetal'>0</li>
+          <li id='physRetal'>0</li>
+          <li id='pierceRetal'>0</li>
+          <li id='bleedRetal'>0</li>
+          <li id='traumaRetal'>0</li>
+          <li id='fireRetal'>0</li>
+          <li id='coldRetal'>0</li>
+          <li id='lightningRetal'>0</li>
+          <li id='acidRetal'>0</li>
+          <li id='vitalityRetal'>0</li>
+          <li id='aetherRetal'>0</li>
+          <li id='chaosRetal'>0</li>
+          <li id='burnRetal'>0</li>
+          <li id='frostRetal'>0</li>
+          <li id='electRetal'>0</li>
+          <li id='poisonRetal'>0</li>
+          <li id='vitDecayRetal'>0</li>
+        </ul>
+      </div>
+    </details>
+	</div>
+</section>
+
+<div id='constellations'>
+  <div id='crossroads'>
+    <h1>Crossroads</h1>	
+    <div id='ascendantBtn' onclick='btnProcess("ascendantBtn", event.button);' oncontextmenu='btnProcess("ascendantBtn", event.button);return false' onmouseenter='display(event, "ascendant");' onMouseOut='hide();'></div>
+    <div id='chaosBtn' onclick='btnProcess("chaosBtn", event.button);' oncontextmenu='btnProcess("chaosBtn", event.button);return false' onmouseenter='display(event, "chaos");' onMouseOut='hide();'></div>
+    <div id='orderBtn' onclick='btnProcess("orderBtn", event.button);' oncontextmenu='btnProcess("orderBtn", event.button);return false' onmouseenter='display(event, "order");' onMouseOut='hide();'></div>
+    <div id='primordialBtn' onclick='btnProcess("primordialBtn", event.button);' oncontextmenu='btnProcess("primordialBtn", event.button);return false' onmouseenter='display(event, "primordial");' onMouseOut='hide();'></div>
+    <div id='eldritchBtn' onclick='btnProcess("eldritchBtn", event.button);' oncontextmenu='btnProcess("eldritchBtn", event.button);return false' onmouseenter='display(event, "eldritch");' onMouseOut='hide();'></div>
+                                           
+  </div>
+  
+  <div id='affinitiesWrapper'>
+    <div id='affinityAscendant'>
+      <h1>Ascendant</h1>
+      
+      <div id='anvil'>
+				<h3 id='anvilTitle' class='locked'>Anvil <span id='anvilCount'>0</span></h3>
+        <ul>
+        	<li id='anvil1' class='locked' onclick='anvil1.countCheck("anvil1", "defense", 10, event.button);' oncontextmenu='anvil1.countCheck("anvil1", "defense", -10, event.button); return false'>+10 Defensive Ability</li>
+          <li id='anvil2' class='locked' onclick='anvil2.countCheck("anvil2", "physique", 10, event.button);' oncontextmenu='anvil2.countCheck("anvil2", "physique", -10, event.button); return false'>+10 Physique</li>
+          <li id='anvil3' class='locked' onclick='anvil3.countCheck("anvil3", "armorAbsorb", 10, event.button);' oncontextmenu='anvil3.countCheck("anvil3", "armorAbsorb", -10, event.button); return false'>Increases Armor Absorption by 5%</li>
+          <li id='anvil4' class='locked' onclick='anvil4.countCheck("anvil4", "defense", 10, event.button);' oncontextmenu='anvil4.countCheck("anvil4", "defense", -10, event.button); return false'>+15 Defensive Ability <br /> +20% Constitution</li>
+          <li id='anvil5' class='locked' onclick='anvil5.countCheck("anvil5", "defense", 10, event.button);' oncontextmenu='anvil5.countCheck("anvil5", "defense", -10, event.button); return false'>Targo's Hammer (ability)</li>
+        </ul>
+      </div>
+    </div>
+    
+    <div id='affinityChaos'>
+      <h1>Chaos</h1>
+    </div>
+    
+    <div id='affinityOrder'>
+      <h1>Order</h1>
+    </div>
+    
+    <div id='affinityPrimordial'>
+      <h1>Primordial</h1>
+    </div>
+    
+    <div id='affinityEldritch'>
+      <h1>Eldritch</h1>
+    </div>
+  </div>
+</div>
+</body>
+</html>

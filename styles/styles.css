@@ -1,0 +1,190 @@
+body {
+	background-color: #000;
+	color: #fff;
+	font-size: 18px;
+	width: 99%;
+	font-family: raleway;
+	font-style: normal;
+	font-weight: 100;
+}
+
+#popup {
+	position: absolute;
+	display: none;
+	background-color: #333;
+	border: solid 1px #000;
+	padding: 10px;
+	font-size: 22px;
+	line-height: 30px;
+}
+
+#popup img {
+	height: 20px;
+	width: 20px;
+	position: relative;
+	top: 3px;
+}
+
+section {
+	overflow: auto;
+}
+
+section:after {
+	clear: both;
+}
+
+h1 {
+	font-style: normal;
+	font-family: montez;
+	font-weight: 400;
+	margin: auto;
+	font-size: 40px;
+}
+
+button {
+	border-radius: 28px;
+	height: 28px;
+	width: 28px;
+	margin: 10px;
+}
+
+#sidebar {
+	width: 10%;
+	display: block;
+	float: left;
+	overflow: hidden;
+}
+
+ul {
+	list-style: none;
+	background-color: #333;
+	padding: 0 3px;
+}
+
+h4 {
+	display: inline-block;
+	margin: 0;
+	padding: 10px;
+}
+
+.col1 {
+	float: left;
+	width: 85%;
+}
+
+.col2 {
+	float: right;
+}
+
+li {
+	border-bottom: solid 1px #000;
+	vertical-align: central;
+	padding: 7px 0;
+}
+
+#affinityDisplayWrapper div {
+	display: block;
+	margin: 3px;
+	background-color: #333;
+	height: 45px;
+	width: 100%;
+}
+
+#affinityDisplayWrapper div img {
+	vertical-align: middle;
+	padding: 5px;
+	margin-right: 10px;
+	margin-left: 5px;
+}
+
+#constellations {
+	width: 89%;
+	display: block;
+	float: right;
+}
+
+#ascendant, #chaos, #order, #primordial, #eldritch { 
+  float: right;
+	margin-top: 10px;
+	margin-right: 10px;
+	font-size: 20px;
+}
+
+#affinitiesWrapper {
+	display: inline-flex;
+	background-color: #6B6B6B;
+	width: 89%;
+	text-align: center;
+}
+
+#affinityAscendant, #affinityChaos, #affinityOrder, #affinityPrimordial, #affinityEldritch {
+	width: 20%;
+}
+
+#affinityAscendant {background-color: purple;}
+#affinityChaos {background-color: red;}
+#affinityOrder {background-color: orange;}
+#affinityPrimordial {background-color: blue;}
+#affinityEldritch {background-color: green;}
+
+#ascendantBtn {
+	background-color: purple;
+	display: inline-block;
+	height: 35px;
+	width: 35px;
+	border-radius: 50%;
+}
+
+#chaosBtn { 
+	background-color: red;
+	display:  inline-block;
+	height: 35px;
+	width: 35px;
+	border-radius: 50%;
+}
+
+#orderBtn { 
+	background-color: orange;
+	display:  inline-block;
+	height: 35px;
+	width: 35px;
+	border-radius: 50%;
+}
+
+#primordialBtn { 
+	background-color: blue;
+	display:  inline-block;
+	height: 35px;
+	width: 35px;
+	border-radius: 50%;
+}
+
+#eldritchBtn { 
+	background-color: green;
+	display:  inline-block;
+	height: 35px;
+	width: 35px;
+	border-radius: 50%;
+}
+
+.active {
+	box-shadow: 0 0 50px #fff;
+}
+
+.clear {
+	clear: both;
+}
+
+.locked {
+	color: #737373;
+	pointer-events: none;
+}
+
+.unlocked {
+	color: #A3A3A3;
+	pointer-events: all;
+}
+
+.selected {
+	color: #fff;
+}
